@@ -2,7 +2,7 @@
 
 # set variables
 TARGET_DIR=.
-PROFILE="x86-self_install"
+PROFILE="x86-vmware"
 #PROFILE="x86-self_install-encrypted"
 KIWI_IMAGE="registry.suse.com/bci/kiwi:10.2.12-2.52"
 
@@ -29,6 +29,13 @@ system build \
 --add-repo https://susemanager.weiss.ddnss.de/ks/dist/child/staging-slmicro61-test-sl-micro-6.1-pool-x86_64-clone/slmicro61-test \
 --add-repo https://susemanager.weiss.ddnss.de/ks/dist/child/staging-slmicro61-test-sl-micro-extras-6.1-pool-x86_64/slmicro61-test \
 --add-repo https://susemanager.weiss.ddnss.de/ks/dist/child/staging-slmicro61-test-suse-manager-tools-for-sl-micro-6.1-x86_64/slmicro61-test
+
+# build ova out of vmdk
+#
+if [ -f /usr/bin/mkova.sh ]; then
+	/usr/bin/mkova.sh --template /usr/share/open-vmdk/template-hw21.ovf SL-Micro.x86_64-6.1 image/SL-Micro.x86_64-6.1.vmdk && mv SL-Micro.x86_64-6.1.ova image/
+fi
+
 exit
 --add-repo https://susemanager.weiss.ddnss.de/ks/dist/child/staging-slmicro61-test-slmicro61-ptfs/slmicro61-test \
 --add-repo https://susemanager.weiss.ddnss.de/ks/dist/slmicro61-test,repo-md,SL-Micro-6.1-Test-Pool \
